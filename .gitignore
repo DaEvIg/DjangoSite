@@ -4,3 +4,4 @@ djangosite/db.sqlite3
 venv/
 
 .idea/
+migrations/
