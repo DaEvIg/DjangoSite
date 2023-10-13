@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 URL configuration for djangosite project.
 
@@ -19,4 +20,12 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+=======
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('brics.urls')),
+>>>>>>> 00aea38 (add new file brics/urls.py)
 ]
