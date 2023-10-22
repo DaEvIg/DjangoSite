@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Заметки.ru</title>
-</head>
-<body>
-    <form method="POST" action="create/">
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Заметки.ru
+{% endblock %}
+
+
+{% block content %}
+        <form method="POST" action="create/">
         {% csrf_token %}
         <p>
             <label>Введите название заметки</label><br>
@@ -14,6 +16,10 @@
         <p>
             <label>Введите текст заметки</label><br>
             <input type="text" name="text" />
+        </p>
+        <p>
+            <label>Введите слаг заметки</label><br>
+            <input type="text" name="slug" />
         </p>
         <p>
             <label>User</label><br>
@@ -27,19 +33,7 @@
         </p>
         <input type="submit" value="Сохранить" >
     </form>
-    {% if notes.count > 0 %}
-    <h2>Список заметок</h2>
-    <table>
-        <thead><th>Id</th><th>Заголовок</th><th>Текст заметки</th><th></th></thead>
-        {% for note in notes %}
-        <tr>
-            <td>{{ note.id }}</td>
-            <td>{{ note.title }}</td>
-            <td>{{ note.text }}</td>
-            <td><a href="edit/{{note.id}}">Изменить</a> | <a href="delete/{{note.id}}">Удалить</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-</body>
-</html>
+{% endblock %}
+
+
+

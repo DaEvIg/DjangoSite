@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+  Удалённые заметки
+{% endblock %}
+
+
+{% block content %}
+    {% if notes.count > 0 %}
+    <h2>Список заметок</h2>
+    <table>
+        <thead><th>Id</th><th>Заголовок</th><th>Текст заметки</th><th>Slag заметки</th><th></th></thead>
+        {% for note in notes %}
+        <tr>
+            <td>{{ note.id }}</td>
+            <td>{{ note.title }}</td>
+            <td>{{ note.text | truncatechars:50 }}</td>
+            <td>{{ note.slug }}</td>
+            <td>
+                <a href="edit/{{note.id}}">Востановить</a> |
+                <a href="delete/{{note.id}}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
+
+
+
+
+

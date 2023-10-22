@@ -6,7 +6,7 @@ from .models import Note
 
 def cards_by_slug(request, card_slug):
     note = Note.objects.get(slug=card_slug)
-    return render(request, 'brics/post_list.html', context={'note': note})
+    return render(request, 'brics/note.html', context={'note': note})
 
 
 def recovery(request):
@@ -21,12 +21,20 @@ def index(request):
     users_list = User.objects.all()
     return render(request, "brics/index.html", {"notes": notes, 'users': users_list})
 
+def show_notes_list(request):
+    notes = Note.objects.all()
+    users_list = User.objects.all()
+    return render(request, "brics/post_list.html", {"notes": notes, 'users': users_list})
+
+def show_delete_list(request):
+    pass
+
 # сохранение данных в бд
 def create(request):
     if request.method == "POST":
         note = Note()
-       # User.user = request.POST.get("User")
-        #note.name = request.POST.get("User")
+        note.slug = request.POST.get("slug")
+        note.name = request.POST.get('user1')
         note.title = request.POST.get("title")
         note.text = request.POST.get("text")
         note.save()
