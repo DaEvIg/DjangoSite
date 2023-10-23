@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'brics',
     'bootstrap5',
+    'safedelete',
 ]
 
 MIDDLEWARE = [

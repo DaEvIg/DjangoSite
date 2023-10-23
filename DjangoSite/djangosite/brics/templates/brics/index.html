@@ -24,12 +24,11 @@
         <p>
             <label>User</label><br>
             <select name="user" id="pet-select">
-                  <option value="">--Please choose an option--</option>
-                  {% for user in users %}
-                    <option value="user1">{{ user }}</option>
+                  <option value="">--Выбери автора--</option>
+                    {% for user in users %}
+                        <option value="user1">{{ user }}</option>
                     {% endfor %}
-</select>
-
+            </select>
         </p>
         <input type="submit" value="Сохранить" >
     </form>

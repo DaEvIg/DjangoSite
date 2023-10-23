@@ -9,11 +9,9 @@ def cards_by_slug(request, card_slug):
     return render(request, 'brics/note.html', context={'note': note})
 
 
-def recovery(request):
-    pass
-
-def delited_list(request):
-    pass
+def deleted_list(request):
+    del_list = Note.objects.deleted_only()
+    return render(request, "brics/delete_list.html", {"del": del_list})
 
 # получение данных из бд
 def index(request):
@@ -26,8 +24,15 @@ def show_notes_list(request):
     users_list = User.objects.all()
     return render(request, "brics/post_list.html", {"notes": notes, 'users': users_list})
 
-def show_delete_list(request):
-    pass
+def soft_delete(request, id):
+    note = Note.objects.get(pk=id)
+    note.delete()
+    return HttpResponseRedirect("/")
+
+def undelete(request, id):
+    del_notes_all = Note.deleted_objects.get(pk=id)
+    del_notes_all.undelete()
+    return HttpResponseRedirect("/")
 
 # сохранение данных в бд
 def create(request):
@@ -39,7 +44,6 @@ def create(request):
         note.text = request.POST.get("text")
         note.save()
     return HttpResponseRedirect("/")
-
 
 # изменение данных в бд
 def edit(request, id):
@@ -55,15 +59,4 @@ def edit(request, id):
             return render(request, "brics/edit.html", {"note": note})
     except Note.DoesNotExist:
         return HttpResponseNotFound("<h2>Note not found</h2>")
-
-
-# удаление данных из бд
-def delete(request, id):
-    try:
-        note = Note.objects.get(id=id)
-        note.delete()
-        return HttpResponseRedirect("/")
-    except Note.DoesNotExist:
-        return HttpResponseNotFound("<h2>Note not found</h2>")
-
 
