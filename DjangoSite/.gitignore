@@ -1,0 +1,7 @@
+*.pyc
+djangosite/db.sqlite3
+.env
+venv/
+
+.idea/
+migrations/

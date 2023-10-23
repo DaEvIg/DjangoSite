@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Удалённые заметки
+{% endblock %}
+
+
+{% block content %}
+    {% if del.count > 0 %}
+    <h2>Список заметок</h2>
+    <table>
+        <thead><th>Id</th><th>Заголовок</th><th>Текст заметки</th><th>Slag заметки</th><th></th></thead>
+        {% for d in del %}
+        <tr>
+            <td>{{ d.id }}</td>
+            <td>{{ d.title }}</td>
+            <td>{{ d.text | truncatechars:50 }}</td>
+            <td>{{ d.slug }}</td>
+            <td>
+                <a href="undelete/{{d.id}}">Востановить</a> |
+                <a href="deleted/{{d.id}}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
+
+
+
+
+

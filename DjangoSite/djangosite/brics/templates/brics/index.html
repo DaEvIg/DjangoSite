@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Заметки.ru
+{% endblock %}
+
+
+{% block content %}
+        <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название заметки</label><br>
+            <input type="text" name="title" />
+        </p>
+        <p>
+            <label>Введите текст заметки</label><br>
+            <input type="text" name="text" />
+        </p>
+        <p>
+            <label>Введите слаг заметки</label><br>
+            <input type="text" name="slug" />
+        </p>
+        <p>
+            <label>User</label><br>
+            <select name="user" id="pet-select">
+                  <option value="">--Выбери автора--</option>
+                    {% for user in users %}
+                        <option value="user1">{{ user }}</option>
+                    {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+{% endblock %}
+
+
+
